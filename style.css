@@ -1,0 +1,509 @@
+/* --- 1. RESET E TIPOGRAFIA (Tecnologia Discreta) --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Fontes: Inter para texto comum */
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Cormorant Garamond para Títulos (Elegante e Premium) */
+h1, h2, h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+}
+
+ul {
+    list-style: none;
+}
+
+/* --- 2. HEADER (#111111 - Preto Carvão suave) --- */
+header {
+    background-color: #111111;
+    padding: 15px 50px;
+    position: fixed; /* Fica fixo no topo ao rolar */
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.container-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo-site {
+    height: 40px; /* Ajuste conforme necessário */
+}
+
+header nav ul {
+    display: flex;
+    gap: 30px;
+}
+
+/* Links do menu em Champagne Rosé (#D8C7BA) */
+header nav a {
+    color: #D8C7BA;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+header nav a:hover {
+    color: #F4C76B; /* Hover em Luz Âmbar */
+}
+
+/* --- 3. HERO (#111111 - Preto Carvão suave) --- */
+.hero {
+    background-color: #111111;
+    color: #F6F1EA; /* Texto Off White quente */
+    display: flex;
+    padding: 150px 50px 100px 50px; /* Padding extra por causa do header fixo */
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+/* --- ESTILOS DO MINI CARROSSEL (LADO DIREITO DA HERO) --- */
+.hero-image-placeholder {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px; /* Mantém a borda elegante */
+    min-height: 400px; /* Garante que a caixa tenha um tamanho mínimo */
+}
+
+.mini-carousel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.mini-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out; /* Transição suave como fade-in */
+}
+
+.mini-slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+.mini-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Faz a imagem preencher o espaço sem distorcer */
+    border-radius: 10px;
+}
+
+/* Botões de navegação dentro da imagem */
+.mini-prev, .mini-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(17, 17, 17, 0.6); /* Fundo transparente escuro */
+    color: #D8C7BA;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 50%;
+    z-index: 10;
+    transition: 0.3s;
+}
+
+.mini-prev { left: 15px; }
+.mini-next { right: 15px; }
+
+.mini-prev:hover, .mini-next:hover {
+    background: #D8C7BA;
+    color: #111111;
+}
+
+/* Ícone de Admin na Navbar */
+.icon-admin {
+    font-size: 18px;
+    opacity: 0.6; /* Deixa discreto */
+}
+
+.icon-admin:hover {
+    opacity: 1;
+}
+/* Botão principal em Champagne Rosé com texto Carvão */
+.btn-principal {
+    background-color: #D8C7BA;
+    color: #111111;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+/* Hover do botão principal em Madeira Clara (#C7A98B) */
+.btn-principal:hover {
+    background-color: #C7A98B;
+}
+
+/* Placeholder da imagem do hero (apenas para visualização) */
+.hero-image-placeholder {
+    flex: 1;
+    height: 400px;
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid #D8C7BA;
+}
+
+/* --- 4. CATÁLOGO (#F6F1EA - Off White quente) --- */
+.catalogo {
+    background-color: #F6F1EA;
+    padding: 80px 50px;
+    text-align: center;
+}
+
+.catalogo h2 {
+    color: #111111;
+    font-size: 36px;
+    margin-bottom: 50px;
+}
+
+.grid-produtos {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Cards em Branco puro (#FFFFFF) com sombra suave */
+.card-produto {
+    background-color: #FFFFFF;
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    transition: 0.3s;
+    border: 2px solid transparent; /* Bordas transparentes por padrão */
+}
+
+/* Efeito Hover do card com borda Champagne Rosé (#D8C7BA) */
+.card-produto:hover {
+    transform: translateY(-5px);
+    border-color: #D8C7BA;
+}
+
+.produto-imagem-placeholder {
+    height: 250px;
+    background-color: #F4F4F4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.card-produto h3 {
+    color: #111111;
+    margin-bottom: 10px;
+}
+
+.card-produto p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.card-produto .preco {
+    display: block;
+    color: #111111;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Botão Comprar em Champagne Rosé (#D8C7BA) */
+.btn-comprar {
+    background-color: #D8C7BA;
+    color: #111111;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    width: 100%;
+}
+
+.btn-comprar:hover {
+    background-color: #F4C76B; /* Hover em Luz Âmbar */
+}
+
+/* --- 5. SOBRE A MARCA (#EFE7DE - Warm Off-White) --- */
+.sobre {
+    background-color: #EFE7DE;
+    padding: 80px 50px;
+    text-align: center;
+}
+
+.sobre-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.sobre h2 {
+    color: #111111;
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.sobre p {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.sobre .destaque {
+    font-weight: 600;
+    color: #111111;
+    font-size: 18px;
+}
+
+/* --- 6. SESSÃO AMBIENTES (#111111 - Preto Carvão suave) --- */
+.ambientes {
+    background-color: #111111;
+    color: #F6F1EA;
+    padding: 80px 50px;
+    text-align: center;
+}
+
+.ambientes h2 {
+    font-size: 36px;
+    margin-bottom: 50px;
+}
+
+.grid-ambientes {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+.ambiente-card {
+    flex: 1;
+    text-align: center;
+}
+
+/* Placeholder para fotos de ambiente */
+.ambiente-card p {
+    height: 300px;
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #D8C7BA;
+}
+
+.ambiente-card span {
+    font-size: 14px;
+    color: #D8C7BA;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- 7. AVALIAÇÕES (#F6F1EA - Off White quente) --- */
+.avaliacoes {
+    background-color: #F6F1EA;
+    padding: 80px 50px;
+    text-align: center;
+}
+
+.avaliacoes h2 {
+    font-size: 36px;
+    margin-bottom: 50px;
+    color: #111111;
+}
+
+.avaliacoes-grid {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+.card-avaliacao {
+    background-color: #FFFFFF;
+    width: 400px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    text-align: left;
+}
+
+/* Estrelas em Âmbar (#F4C76B) */
+.estrelas {
+    color: #F4C76B;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.card-avaliacao p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.card-avaliacao cite {
+    color: #111111;
+    font-weight: 600;
+    font-style: normal;
+}
+
+/* --- 8. RODAPÉ (#111111 - Preto Carvão suave) --- */
+footer {
+    background-color: #111111;
+    padding: 60px 50px;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.logo-footer {
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+footer p {
+    color: #B8B8B8; /* Texto do rodapé */
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+/* Links em Champagne Rosé (#D8C7BA) */
+.social-links a {
+    color: #D8C7BA;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.social-links a:hover {
+    color: #F4C76B; /* Hover em Luz Âmbar */
+}
+
+footer .copy {
+    font-size: 12px;
+    color: #666;
+}
+
+/* --- ESTILOS DO CARRINHO LATERAL --- */
+.carrinho-lateral {
+    position: fixed;
+    top: 0;
+    right: -400px; /* Esconde fora da tela */
+    width: 350px;
+    height: 100vh;
+    background-color: #F6F1EA;
+    box-shadow: -4px 0 15px rgba(0,0,0,0.2);
+    z-index: 2000;
+    transition: right 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.carrinho-lateral.aberto {
+    right: 0; /* Desliza para dentro da tela */
+}
+
+.carrinho-header {
+    background-color: #111111;
+    color: #D8C7BA;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.carrinho-header h2 { font-size: 20px; }
+
+.btn-fechar {
+    background: none;
+    border: none;
+    color: #F6F1EA;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.btn-fechar:hover { color: #D8C7BA; }
+
+.itens-carrinho {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.item-carrinho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0;
+    font-size: 14px;
+}
+
+.btn-remover {
+    color: #e74c3c;
+    cursor: pointer;
+}
+
+.carrinho-footer {
+    padding: 20px;
+    background-color: #fff;
+    border-top: 2px solid #D8C7BA;
+}

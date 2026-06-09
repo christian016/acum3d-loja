@@ -1,0 +1,20 @@
+package br.com.lojaacum.principal;
+
+public class Principal {
+
+    public static void main(String[] args) {
+        
+        // "Fabricando" a primeira luminária no sistema
+        Produto luminaria1 = new Produto();
+        luminaria1.nome = "Luminária Lua Cheia";
+        luminaria1.preco = 150.00;
+        luminaria1.material = "PETG";
+        luminaria1.maquina = "Anycubic Kobra 3 v2";
+        
+        // Mostrando no console
+        System.out.println("O e-commerce está no ar!");
+        System.out.println("Produto cadastrado: " + luminaria1.nome);
+        System.out.println("Preço: R$ " + luminaria1.preco);
+        System.out.println("Impresso em " + luminaria1.material + " na " + luminaria1.maquina);
+    }
+}

@@ -1,0 +1,14 @@
+
+# O endereço do banco que criamos
+spring.datasource.url=jdbc:postgresql://localhost:5432/acum3d_loja
+
+# O usuário padrão e a sua senha
+spring.datasource.username=postgres
+spring.datasource.password=shinagawa
+
+# Isso manda o Spring Boot CRIAR as tabelas automaticamente para nós
+spring.jpa.hibernate.ddl-auto=update
+
+# Isso vai imprimir no console do Eclipse os comandos de banco de dados rodando
+spring.jpa.show-sql=true
+spring.datasource.driver-class-name=org.postgresql.Driver

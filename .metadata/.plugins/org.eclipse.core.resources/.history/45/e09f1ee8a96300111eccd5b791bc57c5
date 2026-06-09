@@ -1,0 +1,42 @@
+package br.com.acum3d.Loja;
+
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+@RestController
+@CrossOrigin(origins = "*") 
+public class ProdutoController {
+
+    // 1. Criamos uma "memória" para o estoque que não zera a cada clique
+    private List<Produto> estoque = new ArrayList<>(Arrays.asList(
+        new Produto(1L, "Luminária Lua Cheia", 150.00),
+        new Produto(2L, "Luminária Geométrica Japandi", 85.50),
+        new Produto(3L, "Luminária Cubo Mágico ASA", 120.00)
+    ));
+
+    // 2. Rota GET: O site pede para VER os produtos (já estava pronta)
+    @GetMapping("/produtos")
+    public List<Produto> listarProdutos() {
+        return estoque;
+    }
+
+    // 3. Rota POST: O site manda um produto NOVO para o Java SALVAR
+    @PostMapping("/produtos")
+    public Produto cadastrarProduto(@RequestBody Produto novoProduto) {
+        
+        // Simulando a criação de um ID (código de barras) único
+        Long novoId = (long) (estoque.size() + 1);
+        
+        // Usamos o construtor para criar a peça final e adicionar ao estoque
+        Produto produtoFinal = new Produto(novoId, novoProduto.getNome(), novoProduto.getPreco());
+        estoque.add(produtoFinal);
+        
+        System.out.println("Novo produto cadastrado com sucesso: " + produtoFinal.getNome());
+        
+        // Devolvemos a peça confirmada para o site saber que deu certo
+        return produtoFinal;
+    }
+}

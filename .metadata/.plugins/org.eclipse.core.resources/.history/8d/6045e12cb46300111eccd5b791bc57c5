@@ -1,0 +1,26 @@
+package br.com.acum3d.Loja;
+
+public class Produto {
+    private Long id;
+    private String nome;
+    private double preco;
+    private String imagem;
+
+    public Produto(Long id, String nome, double preco, String imagem) {
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
+        this.imagem = imagem;
+    }
+
+    // Getters (Leitura)
+    public Long getId() { return id; }
+    public String getNome() { return nome; }
+    public double getPreco() { return preco; }
+    public String getImagem() { return imagem; }
+
+    // Setters (Escrita/Edição)
+    public void setNome(String nome) { this.nome = nome; }
+    public void setPreco(double preco) { this.preco = preco; }
+    public void setImagem(String imagem) { this.imagem = imagem; }
+}

@@ -1,0 +1,9 @@
+package br.com.lojaacum.principal;
+
+public class Produto {
+    // Estas são as características (atributos) do nosso molde
+    String nome;
+    double preco;
+    String material;
+    String maquina;
+}

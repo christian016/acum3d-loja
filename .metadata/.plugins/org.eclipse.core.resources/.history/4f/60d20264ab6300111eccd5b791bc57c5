@@ -1,0 +1,34 @@
+package br.com.acum3d.Loja;
+
+import org.springframework.web.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+@RestController
+@CrossOrigin(origins = "*") 
+public class ProdutoController {
+
+    // Atualizamos a lista inicial com os caminhos das imagens que você já tem no PC!
+    private List<Produto> estoque = new ArrayList<>(Arrays.asList(
+        new Produto(1L, "Luminária Lua Cheia", 150.00, "imagensluminarias/LuminariadeLua.jpg"),
+        new Produto(2L, "Luminária Geométrica Japandi", 85.50, "imagensluminarias/Luminariadebancadajapones.jpg"),
+        new Produto(3L, "Luminária Cubo Mágico ASA", 120.00, "imagensluminarias/LuminariaCubo.jpg")
+    ));
+
+    @GetMapping("/produtos")
+    public List<Produto> listarProdutos() {
+        return estoque;
+    }
+
+    @PostMapping("/produtos")
+    public Produto cadastrarProduto(@RequestBody Produto novoProduto) {
+        Long novoId = (long) (estoque.size() + 1);
+        
+        // Agora passamos a imagem também na hora de salvar!
+        Produto produtoFinal = new Produto(novoId, novoProduto.getNome(), novoProduto.getPreco(), novoProduto.getImagem());
+        estoque.add(produtoFinal);
+        
+        return produtoFinal;
+    }
+}

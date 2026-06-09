@@ -1,0 +1,25 @@
+package br.com.acum3d.Loja;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.Arrays;
+import java.util.List;
+
+@RestController
+@CrossOrigin(origins = "*") // O passe livre para o seu HTML acessar os dados!
+public class ProdutoController {
+
+    // Criamos uma nova rota chamada /produtos
+    @GetMapping("/produtos")
+    public List<Produto> listarProdutos() {
+        
+        // Fabricando os produtos no Java (logo mais faremos isso com Banco de Dados)
+        Produto luminaria1 = new Produto(1L, "Luminária Lua Cheia", 150.00);
+        Produto luminaria2 = new Produto(2L, "Luminária Geométrica Japandi", 85.50);
+        Produto luminaria3 = new Produto(3L, "Luminária Cubo Mágico ASA", 120.00);
+
+        // Retornamos a lista completa. O Spring Boot transforma isso em JSON sozinho!
+        return Arrays.asList(luminaria1, luminaria2, luminaria3);
+    }
+}

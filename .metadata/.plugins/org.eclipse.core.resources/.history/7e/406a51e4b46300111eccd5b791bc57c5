@@ -1,0 +1,62 @@
+package br.com.acum3d.Loja;
+
+import org.springframework.web.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+@RestController
+@CrossOrigin(origins = "*") 
+public class ProdutoController {
+
+    // Atualizamos a lista inicial com os caminhos das imagens que você já tem no PC!
+    private List<Produto> estoque = new ArrayList<>(Arrays.asList(
+        new Produto(1L, "Luminária Lua Cheia", 150.00, "imagensluminarias/LuminariadeLua.jpg"),
+        new Produto(2L, "Luminária Geométrica Japandi", 85.50, "imagensluminarias/Luminariadebancadajapones.jpg"),
+        new Produto(3L, "Luminária Cubo Mágico ASA", 120.00, "imagensluminarias/LuminariaCubo.jpg")
+    ));
+
+    @GetMapping("/produtos")
+    public List<Produto> listarProdutos() {
+        return estoque;
+    }
+
+    @PostMapping("/produtos")
+    public Produto cadastrarProduto(@RequestBody Produto novoProduto) {
+        Long novoId = (long) (estoque.size() + 1);
+        
+        // Agora passamos a imagem também na hora de salvar!
+        Produto produtoFinal = new Produto(novoId, novoProduto.getNome(), novoProduto.getPreco(), novoProduto.getImagem());
+        estoque.add(produtoFinal);
+        
+        return produtoFinal;
+    }
+ 
+    // ... seu código GET e POST anteriores continuam aqui em cima ...
+
+    // Rota PUT: O site manda os dados novos e o ID do produto para atualizar
+    @PutMapping("/produtos/{id}")
+    public Produto atualizarProduto(@PathVariable Long id, @RequestBody Produto produtoEditado) {
+        // Procura o produto na lista pelo ID
+        for (Produto p : estoque) {
+            if (p.getId().equals(id)) {
+                // Se achar, atualiza os dados
+                p.setNome(produtoEditado.getNome());
+                p.setPreco(produtoEditado.getPreco());
+                p.setImagem(produtoEditado.getImagem());
+                System.out.println("Produto atualizado: " + p.getNome());
+                return p;
+            }
+        }
+        return null; // Retorna nulo se não encontrar
+    }
+
+    // Rota DELETE: O site manda o ID do produto que deve ser apagado
+    @DeleteMapping("/produtos/{id}")
+    public String excluirProduto(@PathVariable Long id) {
+        // Remove da lista se o ID for igual
+        estoque.removeIf(p -> p.getId().equals(id));
+        System.out.println("Produto apagado. ID: " + id);
+        return "Produto removido com sucesso!";
+    }
+}

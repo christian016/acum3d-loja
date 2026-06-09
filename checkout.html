@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Finalizar Compra - ACUM 3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background-color: #F6F1EA; padding-top: 100px; }
+        .checkout-container { max-width: 1000px; margin: 0 auto; display: flex; gap: 40px; padding: 20px; }
+        .checkout-form, .checkout-resumo { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .checkout-form { flex: 2; }
+        .checkout-resumo { flex: 1; height: fit-content; border-top: 4px solid #111111; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-family: 'Inter', sans-serif; }
+        .resumo-item { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; border-bottom: 1px dashed #ccc; padding-bottom: 5px;}
+        .total-final { font-size: 20px; font-weight: bold; color: #111111; margin-top: 20px; text-align: right; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container-header">
+            <a href="index.html"><img src="imagenslogo/logo.png" alt="Logo ACUM 3D" class="logo-site"></a>
+            <h1 style="color: #D8C7BA; font-size: 18px;"><i class="fa-solid fa-lock"></i> CHECKOUT SEGURO</h1>
+            <a href="index.html" style="color: #D8C7BA;"><i class="fa-solid fa-arrow-left"></i> Voltar</a>
+        </div>
+    </header>
+
+    <div class="checkout-container">
+        <div class="checkout-form">
+            <h2 style="margin-bottom: 20px; color: #111111;">Dados de Entrega</h2>
+            <form id="form-compra">
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" required placeholder="Seu nome">
+                </div>
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="email" required placeholder="seu@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Endereço Completo</label>
+                    <input type="text" required placeholder="Rua, Número, Bairro">
+                </div>
+                <div class="form-group">
+                    <label>Forma de Pagamento</label>
+                    <select required>
+                        <option value="pix">PIX (Aprovação Imediata)</option>
+                        <option value="cartao">Cartão de Crédito</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-principal" style="width: 100%; margin-top: 20px;">Confirmar e Pagar</button>
+            </form>
+        </div>
+
+        <div class="checkout-resumo">
+            <h2 style="margin-bottom: 20px; color: #111111;">Resumo do Pedido</h2>
+            <div id="lista-resumo">
+                </div>
+            <div class="total-final">
+                Total: R$ <span id="total-checkout">0,00</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Lógica para puxar os dados do LocalStorage
+        let carrinho = JSON.parse(localStorage.getItem('acum_carrinho')) || [];
+        const listaResumo = document.getElementById('lista-resumo');
+        const totalCheckout = document.getElementById('total-checkout');
+        
+        let total = 0;
+
+        if(carrinho.length === 0) {
+            listaResumo.innerHTML = '<p>Seu carrinho está vazio.</p>';
+            document.querySelector('.btn-principal').style.display = 'none';
+        } else {
+            carrinho.forEach(item => {
+                total += item.preco;
+                listaResumo.innerHTML += `
+                    <div class="resumo-item">
+                        <span>${item.nome}</span>
+                        <span>R$ ${item.preco.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                `;
+            });
+            totalCheckout.innerText = total.toFixed(2).replace('.', ',');
+        }
+
+        // Simulando a compra
+        document.getElementById('form-compra').addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita que a página recarregue
+            alert('Pedido realizado com sucesso! Em breve você receberá as informações de rastreio.');
+            localStorage.removeItem('acum_carrinho'); // Limpa o carrinho
+            window.location.href = 'index.html'; // Volta para a loja
+        });
+    </script>
+
+</body>
+</html>

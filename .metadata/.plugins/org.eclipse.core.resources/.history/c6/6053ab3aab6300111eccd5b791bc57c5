@@ -1,0 +1,23 @@
+package br.com.acum3d.Loja;
+
+public class Produto {
+    private Long id;
+    private String nome;
+    private double preco;
+    private String imagem; // <-- NOVO CAMPO AQUI
+
+    // Atualizamos o Construtor para receber a imagem
+    public Produto(Long id, String nome, double preco, String imagem) {
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
+        this.imagem = imagem;
+    }
+
+    public Long getId() { return id; }
+    public String getNome() { return nome; }
+    public double getPreco() { return preco; }
+    
+    // NOVO GETTER AQUI
+    public String getImagem() { return imagem; } 
+}

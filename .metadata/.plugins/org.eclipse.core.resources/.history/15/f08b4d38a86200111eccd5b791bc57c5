@@ -1,0 +1,15 @@
+package br.com.acum3d.Loja;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+// Essa anotação avisa ao Spring Boot que esta classe é um "porteiro" da internet
+@RestController
+public class ProdutoController {
+
+    // Essa anotação cria uma "rota" na URL
+    @GetMapping("/teste")
+    public String testarServidor() {
+        return "Olá! O servidor da ACUM 3D está online e funcionando perfeitamente!";
+    }
+}

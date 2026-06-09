@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACUM 3D - Iluminação Contemporânea e Aconchegante</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container-header">
+            <img src="imagenslogo/logo.png" alt="Logo ACUM 3D" class="logo-site">
+            <nav>
+                <ul>
+                    <li><a href="#catalogo">Coleções</a></li>
+                    <li><a href="#sobre">Nossa História</a></li>
+                    <li><a href="#ambientes">Inspiração</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                    <li><a href="#" onclick="abrirCarrinho()" class="icon-admin" title="Carrinho"><i class="fa-solid fa-cart-shopping"></i> <span id="contador-carrinho" style="font-size: 12px; color: #D8C7BA;">(0)</span></a></li>
+                    <li><a href="admin.html" class="icon-admin" title="Área do Administrador"><i class="fa-solid fa-gear"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Luz que abraça.<br>Design que inspira.</h1>
+            <p>Peças autorais produzidas em impressão 3D discreta para transformar ambientes em espaços acolhedores.</p>
+            <a href="#catalogo" class="btn-principal">Descobrir Coleção</a>
+        </div>
+        <div class="hero-image-placeholder">
+            <div class="mini-carousel">
+                <div class="mini-slide active">
+                    <img src="imagencarrocel/Luminariadebancadajapones_carrocel.png" alt="Luminária Japandi">
+                </div>
+                <div class="mini-slide">
+                    <img src="imagencarrocel/japonesadebancada.png" alt="Luminária Lua"> 
+                </div>
+                <div class="mini-slide">
+                    <img src="imagencarrocel/kanicarrocel.png" alt="Luminária Cubo ASA">
+                </div>
+                
+                <button class="mini-prev" onclick="moveMiniSlide(-1)">&#10094;</button>
+                <button class="mini-next" onclick="moveMiniSlide(1)">&#10095;</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="catalogo" class="catalogo">
+        <h2>Luminárias de Design Autoral</h2>
+        
+        <div class="grid-produtos" id="vitrine-produtos">
+        
+            <!-- <article class="card-produto">
+                <div class="produto-imagem-placeholder">
+                    <p>[Foto Produto 1]</p>
+                </div>
+                <h3>Luminária Lua Cheia</h3>
+                <p>Textura orgânica em PETG. Toque suave.</p>
+                <span class="preco">R$ 150,00</span>
+                <button class="btn-comprar">Ver Detalhes</button>
+            </article>
+
+            <article class="card-produto">
+                <div class="produto-imagem-placeholder">
+                    <p>[Foto Produto 2]</p>
+                </div>
+                <h3>Luminária Geométrica Japandi</h3>
+                <p>Minimalismo discreto impresso na Anycubic.</p>
+                <span class="preco">R$ 85,50</span>
+                <button class="btn-comprar">Ver Detalhes</button>
+            </article>
+
+            <article class="card-produto">
+                <div class="produto-imagem-placeholder">
+                    <p>[Foto Produto 3]</p>
+                </div>
+                <h3>Luminária Cubo Mágico ASA</h3>
+                <p>Resistência e sofisticação em material premium.</p>
+                <span class="preco">R$ 120,00</span>
+                <button class="btn-comprar">Ver Detalhes</button>
+            </article> -->
+        </div>
+    </section>
+
+    <section id="sobre" class="sobre">
+        <div class="sobre-content">
+            <h2>Nossa Essência</h2>
+            <p>A ACUM 3D nasceu da paixão pelo design contemporâneo e pelo conforto do minimalismo japonês. Unimos a precisão da tecnologia 3D discreta com o carinho do acabamento artesanal.</p>
+            <p class="destaque">Cada peça é pensada para criar luzes âmbares que trazem calor humano e sofisticação para o seu lar.</p>
+        </div>
+    </section>
+
+    <section id="ambientes" class="ambientes">
+        <h2>Sua ACUM no Ambiente Ideal</h2>
+        <div class="grid-ambientes">
+            <div class="ambiente-card">
+                <p>[Foto: No Quarto]</p>
+                <span>Aconchego para dormir</span>
+            </div>
+            <div class="ambiente-card">
+                <p>[Foto: No Escritório]</p>
+                <span>Foco com suavidade</span>
+            </div>
+            <div class="ambiente-card">
+                <p>[Foto: Na Sala]</p>
+                <span>Minimalismo na mesa de cabeceira</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="avaliacoes">
+        <h2>O que dizem nossos Clientes</h2>
+        <div class="avaliacoes-grid">
+            <article class="card-avaliacao">
+                <div class="estrelas">★★★★★</div>
+                <p>"A luminária da Lua é impressionante. A textura 3D é super discreta e a luz deixa meu quarto muito acolhedor."</p>
+                <cite>- Mariana S.</cite>
+            </article>
+            <article class="card-avaliacao">
+                <div class="estrelas">★★★★★</div>
+                <p>"Design impecável. Se encaixou perfeitamente no estilo Japandi da minha sala."</p>
+                <cite>- Roberto T.</cite>
+            </article>
+        </div>
+    </section>
+
+    <footer id="contato">
+        <div class="footer-content">
+            <img src="imagenslogo/logo.png" alt="Logo ACUM 3D" class="logo-footer">
+            <p>ACUM 3D - Iluminação Artesanal Tecnológica.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/acum3d/" target="_blank">Instagram</a>
+                <a href="https://wa.me/5561999149294" target="_blank">WhatsApp</a>
+            </div>
+            <p class="copy">© 2026 ACUM 3D. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    <div id="carrinho-lateral" class="carrinho-lateral">
+        <div class="carrinho-header">
+            <h2>Seu Carrinho</h2>
+            <button onclick="fecharCarrinho()" class="btn-fechar"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="itens-carrinho" class="itens-carrinho">
+            </div>
+        <div class="carrinho-footer">
+            <h3>Total: R$ <span id="total-carrinho">0,00</span></h3>
+            <a href="checkout.html" class="btn-principal" style="display: block; text-align: center; margin-top: 15px;">Finalizar Compra</a>
+        </div>
+    </div>
+
+    <script>
+        // --- INTEGRAÇÃO COM O BACK-END (JAVA) ---
+        async function carregarProdutosDoServidor() {
+            try {
+                // 1. O JavaScript "bate na porta" do seu Java
+                const resposta = await fetch('http://localhost:8080/produtos');
+                
+                // 2. Ele recebe aquele texto JSON e transforma em uma lista que ele entende
+                const produtosDaLoja = await resposta.json();
+                
+                // 3. Ele encontra a nossa vitrine vazia lá no HTML
+                const vitrine = document.getElementById('vitrine-produtos');
+                vitrine.innerHTML = ''; // Garante que está limpa
+                
+                // 4. Ele cria um card de HTML para CADA produto que o Java mandou
+                produtosDaLoja.forEach(produto => {
+                    
+                    // Se o produto não tiver imagem, usamos uma cor de fundo padrão
+                    const imagemSrc = produto.imagem ? produto.imagem : 'https://via.placeholder.com/300x250?text=Sem+Foto';
+
+                    vitrine.innerHTML += `
+                        <article class="card-produto">
+                            <div class="produto-imagem-placeholder" style="padding: 0; overflow: hidden; background: none;">
+                                <img src="${imagemSrc}" alt="${produto.nome}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px;">
+                            </div>
+                            <h3>${produto.nome}</h3>
+                            <p>Produto exclusivo ACUM 3D.</p>
+                            <span class="preco">R$ ${produto.preco.toFixed(2).replace('.', ',')}</span>
+                            <button class="btn-comprar" onclick="adicionarAoCarrinho('${produto.nome}', ${produto.preco})">Adicionar ao Carrinho</button>
+                        </article>
+                    `;
+                });
+            } catch (erro) {
+                console.error("Erro ao buscar os produtos no Java:", erro);
+                document.getElementById('vitrine-produtos').innerHTML = '<p>Erro ao carregar o estoque. Verifique se o servidor está online.</p>';
+            }
+        }
+        // LÓGICA DO CARRINHO DE COMPRAS
+        let carrinho = JSON.parse(localStorage.getItem('acum_carrinho')) || [];
+
+        function adicionarAoCarrinho(nome, preco) {
+            carrinho.push({ nome: nome, preco: preco });
+            localStorage.setItem('acum_carrinho', JSON.stringify(carrinho));
+            atualizarCarrinho();
+            abrirCarrinho(); // Abre a gaveta automaticamente para o cliente ver
+        }
+
+        function atualizarCarrinho() {
+            const container = document.getElementById('itens-carrinho');
+            const totalSpan = document.getElementById('total-carrinho');
+            const contador = document.getElementById('contador-carrinho');
+            
+            container.innerHTML = '';
+            let total = 0;
+
+            carrinho.forEach((item, index) => {
+                total += item.preco;
+                container.innerHTML += `
+                    <div class="item-carrinho">
+                        <span>${item.nome}</span>
+                        <span>R$ ${item.preco.toFixed(2).replace('.', ',')}</span>
+                        <i class="fa-solid fa-trash btn-remover" onclick="removerDoCarrinho(${index})"></i>
+                    </div>
+                `;
+            });
+
+            totalSpan.innerText = total.toFixed(2).replace('.', ',');
+            contador.innerText = `(${carrinho.length})`;
+        }
+
+        function removerDoCarrinho(index) {
+            carrinho.splice(index, 1);
+            localStorage.setItem('acum_carrinho', JSON.stringify(carrinho));
+            atualizarCarrinho();
+        }
+
+        function abrirCarrinho() {
+            document.getElementById('carrinho-lateral').classList.add('aberto');
+            atualizarCarrinho();
+        }
+
+        function fecharCarrinho() {
+            document.getElementById('carrinho-lateral').classList.remove('aberto');
+        }
+
+        // Atualiza o número no ícone ao carregar a página
+        window.onload = () => {
+            atualizarCarrinho();
+            carregarProdutosDoServidor(); // Chama os produtos do Java
+        };
+    </script>
+</body>
+</html>
+
+<script>
+        let slideIndex = 0;
+        const miniSlides = document.querySelectorAll('.mini-slide');
+
+        function showMiniSlide(index) {
+            // Esconde todas as imagens
+            miniSlides.forEach(slide => slide.classList.remove('active'));
+            
+            // Faz o loop se passar do limite
+            if (index >= miniSlides.length) slideIndex = 0;
+            if (index < 0) slideIndex = miniSlides.length - 1;
+            
+            // Mostra a imagem certa
+            miniSlides[slideIndex].classList.add('active');
+        }
+
+        function moveMiniSlide(step) {
+            slideIndex += step;
+            showMiniSlide(slideIndex);
+        }
+
+        // Faz o carrossel girar sozinho a cada 4 segundos (4000 milissegundos)
+        setInterval(() => moveMiniSlide(1), 4000);
+    </script>
+</body>
+</html>

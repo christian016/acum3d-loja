@@ -1,0 +1,15 @@
+package br.com.lojaacum.principal;
+
+public class Principal {
+
+    public static void main(String[] args) {
+        
+        // Olha como fica muito mais rápido! Passamos tudo de uma vez, em ordem.
+        Produto luminaria1 = new Produto("Luminária Lua Cheia", 150.00, "PETG", "Anycubic Kobra 3 v2");
+        Produto luminaria2 = new Produto("Luminária Cubo Mágico", 80.00, "ASA", "Creality Ender 3 V3");
+        
+        System.out.println("Estoque atualizado com sucesso!");
+        System.out.println("Temos a " + luminaria1.nome + " por R$ " + luminaria1.preco);
+        System.out.println("Temos a " + luminaria2.nome + " por R$ " + luminaria2.preco);
+    }
+}
