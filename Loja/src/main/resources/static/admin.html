@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>ACUM 3D - Painel Administrativo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos específicos para a página de Admin */
+        body { background-color: #F6F1EA; padding-top: 80px; }
+        .admin-container { max-width: 1000px; margin: 0 auto; padding: 40px; }
+        .admin-section { background: white; padding: 30px; border-radius: 10px; margin-bottom: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .admin-section h2 { border-bottom: 2px solid #D8C7BA; padding-bottom: 10px; margin-bottom: 20px; }
+        form { display: grid; gap: 15px; }
+        input, select, textarea { padding: 12px; border: 1px solid #ccc; border-radius: 5px; width: 100%; }
+        .btn-salvar { background-color: #111111; color: white; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn-salvar:hover { background-color: #C7A98B; }
+        .lista-itens { margin-top: 20px; border-top: 1px solid #eee; }
+        .item-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; align-items: center; }
+        .btn-editar { color: #3498db; cursor: pointer; }
+        .btn-excluir { color: #e74c3c; cursor: pointer; margin-left: 10px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container-header">
+            <a href="index.html"><img src="imagenslogo/logo.png" alt="Logo ACUM 3D" class="logo-site"></a>
+            <h1 style="color: #D8C7BA; font-size: 18px;">PAINEL DE CONTROLE</h1>
+            <a href="index.html" style="color: #D8C7BA;"><i class="fa-solid fa-house"></i> Voltar à Loja</a>
+        </div>
+    </header>
+
+    <div class="admin-container">
+        <section class="admin-section">
+            <h2><i class="fa-solid fa-images"></i> Gerenciar Carrossel Principal</h2>
+            <p>Selecione até 3 produtos para o destaque da página inicial.</p>
+            <form>
+                <select>
+                    <option>Destaque 1: Luminária Lua Cheia</option>
+                    <option>Destaque 1: Luminária Japandi</option>
+                </select>
+                <select>
+                    <option>Destaque 2: Luminária Japandi</option>
+                </select>
+                <select>
+                    <option>Destaque 3: Luminária Cubo ASA</option>
+                </select>
+                <button type="button" class="btn-salvar">Atualizar Destaques</button>
+            </form>
+        </section>
+
+        <section class="admin-section">
+            <h2><i class="fa-solid fa-plus"></i> Cadastrar Produto</h2>
+            <form id="form-cadastro">
+                <input type="hidden" id="admin-id">
+                <input type="hidden" id="admin-imagem-antiga">
+
+                <input type="text" id="admin-nome" placeholder="Nome do Produto (Ex: Luminária Customizada)">
+                <input type="text" id="admin-preco" placeholder="Preço (Ex: 199.90)">
+                <textarea id="admin-desc" placeholder="Descrição Curta (Material, Máquina...)"></textarea>
+                
+                <label style="font-size: 14px; font-weight: bold;">Foto da Luminária:</label>
+                <input type="file" id="admin-imagem" accept="image/*">
+                
+                
+                <button type="button" class="btn-salvar" id="btn-acao-salvar" onclick="processarFormulario()">Salvar Produto</button>
+            </form>
+            
+            <div class="lista-itens"></div>
+            
+        </section>
+    </div>
+
+    <script>
+        let produtosNoServidor = [];
+
+        // 1. Carrega os produtos na lista inferior assim que abrir a página
+        async function carregarListaDeProdutos() {
+            try {
+                const resposta = await fetch('/produtos');
+                produtosNoServidor = await resposta.json();
+                
+                const divLista = document.querySelector('.lista-itens');
+                divLista.innerHTML = '<h3>Produtos Cadastrados no Servidor</h3>'; // Limpa e põe o título
+                
+                produtosNoServidor.forEach(produto => {
+                    divLista.innerHTML += `
+                        <div class="item-row">
+                            <span>${produto.nome} - R$ ${produto.preco.toFixed(2).replace('.', ',')}</span>
+                            <div>
+                                <i class="fa-solid fa-pen-to-square btn-editar" onclick="prepararEdicao(${produto.id})" title="Editar"></i> 
+                                <i class="fa-solid fa-trash btn-excluir" onclick="excluirProduto(${produto.id})" title="Excluir"></i>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (erro) {
+                console.error("Erro ao carregar produtos:", erro);
+            }
+        }
+
+        // Executa ao abrir a página
+        window.onload = carregarListaDeProdutos;
+
+        // 2. Função do botão Editar (Lápis)
+        function prepararEdicao(id) {
+            // Acha o produto clicado na nossa lista
+            const produto = produtosNoServidor.find(p => p.id === id);
+            
+            // Preenche os campos do formulário com os dados dele
+            document.getElementById('admin-id').value = produto.id;
+            document.getElementById('admin-nome').value = produto.nome;
+            document.getElementById('admin-preco').value = produto.preco;
+            document.getElementById('admin-imagem-antiga').value = produto.imagem; // Guarda a foto antiga
+            
+            // Muda a cara do botão para avisar que é uma edição
+            document.getElementById('btn-acao-salvar').innerText = "Atualizar Produto";
+            document.getElementById('btn-acao-salvar').style.backgroundColor = "#D8C7BA";
+            document.getElementById('btn-acao-salvar').style.color = "#111111";
+            window.scrollTo(0, 0); // Sobe a página pro topo
+        }
+
+        // 3. Processa o Formulário (Agora sabe se é POST ou PUT)
+        function processarFormulario() {
+            const idDigitado = document.getElementById('admin-id').value;
+            const nomeDigitado = document.getElementById('admin-nome').value;
+            const precoDigitado = document.getElementById('admin-preco').value;
+            const arquivoFisico = document.getElementById('admin-imagem').files[0];
+            const imagemAntiga = document.getElementById('admin-imagem-antiga').value;
+
+            if (!nomeDigitado || !precoDigitado) {
+                alert("Por favor, preencha o nome e o preço.");
+                return;
+            }
+
+            if (arquivoFisico) {
+                const leitor = new FileReader();
+                leitor.readAsDataURL(arquivoFisico);
+                leitor.onload = function () {
+                    enviarParaOJava(idDigitado, nomeDigitado, precoDigitado, leitor.result);
+                };
+            } else {
+                // Se não enviou foto nova, usa a antiga
+                enviarParaOJava(idDigitado, nomeDigitado, precoDigitado, imagemAntiga);
+            }
+        }
+
+        async function enviarParaOJava(id, nome, preco, imagemBase64) {
+            const produtoNovo = {
+                nome: nome,
+                preco: parseFloat(preco.replace(',', '.')),
+                imagem: imagemBase64
+            };
+
+            // SE TIVER ID, É EDIÇÃO (PUT). SE NÃO TIVER, É NOVO (POST).
+            const metodo = id ? 'PUT' : 'POST';
+            const url = id ? `/produtos/${id}` : 'http://localhost:8080/produtos';
+
+            try {
+                const resposta = await fetch(url, {
+                    method: metodo,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(produtoNovo)
+                });
+
+                if (resposta.ok) {
+                    alert('Produto salvo com sucesso!');
+                    document.getElementById('form-cadastro').reset();
+                    document.getElementById('admin-id').value = ''; 
+                    document.getElementById('admin-imagem-antiga').value = '';
+                    
+                    // Restaura o botão pro estilo normal
+                    document.getElementById('btn-acao-salvar').innerText = "Salvar Produto";
+                    document.getElementById('btn-acao-salvar').style.backgroundColor = "#111111";
+                    document.getElementById('btn-acao-salvar').style.color = "white";
+                    
+                    // Recarrega a lista lá embaixo
+                    carregarListaDeProdutos(); 
+                }
+            } catch (erro) {
+                alert("Erro ao conectar com o Java.");
+            }
+        }
+
+        // 4. Função do botão Excluir (Lixeira)
+        async function excluirProduto(id) {
+            if(confirm("Tem certeza que deseja apagar esta luminária do estoque?")) {
+                try {
+                    const resposta = await fetch(`/produtos/${id}`, {
+                        method: 'DELETE'
+                    });
+
+                    if (resposta.ok) {
+                        alert("Produto apagado.");
+                        carregarListaDeProdutos(); // Atualiza a lista na tela
+                    }
+                } catch (erro) {
+                    alert("Erro ao tentar apagar.");
+                }
+            }
+        }
+    </script>
+</body>
+</html>
